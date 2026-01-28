@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonies - Solomon's Porch</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <img src="images/rccglogo.png" alt="logo">
+                    <h1 class="church-name">RCCG Solomon's Porch</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="sermons.html" class="nav-link">Sermons</a></li>
+                    <li><a href="talents.html" class="nav-link">Talents</a></li>
+                    <li><a href="testimonials.html" class="nav-link active">Testimonies</a></li>
+                </ul>
+                <button class="dark-mode-toggle" id="darkModeBtn" aria-label="Toggle dark mode">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Testimonies & Stories</h1>
+                <p>Share how God is working in your life</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <div class="section">
+            <div class="container">
+                <div class="two-column-layout">
+                    <!-- Left Column: Form -->
+                    <div class="form-column">
+                        <div class="form-card">
+                            <h2>Share Your Testimony</h2>
+                            <form id="testimonyForm" class="form">
+                                <div class="form-group">
+                                    <label for="testimonyName">Name (Optional)</label>
+                                    <input type="text" id="testimonyName" name="testimonyName" placeholder="Your name (leave blank to be anonymous)">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="testimonyTitle">Testimony Title *</label>
+                                    <input type="text" id="testimonyTitle" name="testimonyTitle" required placeholder="e.g., How God Healed My Family">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="testimonyMessage">Your Story *</label>
+                                    <textarea id="testimonyMessage" name="testimonyMessage" required placeholder="Share how God has worked in your life. What changed? What lessons did you learn?" rows="6"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary full-width">Post Testimony</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Testimonies List -->
+                    <div class="content-column">
+                        <div class="filters-section">
+                            <div class="filter-group">
+                                <label for="sortTestimonies">Sort by:</label>
+                                <select id="sortTestimonies" class="filter-select">
+                                    <option value="newest">Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                    <option value="mostLiked">Most Liked</option>
+                                </select>
+                            </div>
+
+                            <div class="stats">
+                                <p>Total Testimonies: <span id="testimonyCount">0</span></p>
+                            </div>
+                        </div>
+
+                        <div id="testimoniesContainer" class="testimonies-list">
+                            <p class="placeholder-text">No testimonies yet. Be the first to share your story!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Solomon's Porch Community Church. All rights reserved.</p>
+            <p>Building faith, community, and purpose together.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/testimonials.js"></script>
+</body>
+</html>

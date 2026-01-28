@@ -1,0 +1,61 @@
+# Netlify Configuration for Solomon's Porch Church Website
+
+# Build settings
+[build]
+  # Directory to deploy
+  publish = "."
+  
+  # Functions directory for serverless functions
+  functions = "netlify/functions"
+  
+  # No build command needed for static site
+  command = ""
+  
+  # Watch for changes in these files
+  ignore = "git diff --quiet HEAD~1 HEAD -- {assets,js,css,*.html} &> /dev/null"
+
+# Development settings
+[build.environment]
+  NODE_ENV = "production"
+
+# Redirects and rewrites
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = { Language = ["en"] }
+
+# Cache behavior and headers
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# Context-specific settings
+[context.production]
+  command = ""
+  
+[context.deploy-preview]
+  command = ""
+
+[context.branch-deploy]
+  command = ""

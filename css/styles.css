@@ -1,0 +1,1238 @@
+/* ========================================
+   SOLOMON'S PORCH - CHURCH WEB APPLICATION
+   Modern, Responsive, Church-Appropriate Design
+   ======================================== */
+
+/* ========================================
+   1. CSS VARIABLES & ROOT STYLES
+   ======================================== */
+
+:root {
+    /* Primary Colors - Church-Appropriate */
+    --primary-color: #2c3e50;      /* Deep Navy Blue */
+    --secondary-color: #3498db;    /* Soft Blue */
+    --accent-color: #f39c12;       /* Gold */
+    --success-color: #27ae60;      /* Soft Green */
+    --danger-color: #e74c3c;       /* Soft Red */
+    --light-bg: #f8f9fa;           /* Light Gray */
+    --white: #ffffff;
+    --dark-text: #2c3e50;
+    --light-text: #7f8c8d;
+
+    /* Dark Mode Colors */
+    --dark-bg: #1a1a1a;
+    --dark-card: #2d2d2d;
+    --dark-text-primary: #f8f9fa;
+    --dark-text-secondary: #b0b0b0;
+
+    /* Spacing System */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-2xl: 4rem;
+
+    /* Typography */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --light-bg: var(--dark-bg);
+    --white: var(--dark-card);
+    --dark-text: var(--dark-text-primary);
+    --light-text: var(--dark-text-secondary);
+}
+
+/* ========================================
+   2. RESET & BASE STYLES
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    color: var(--dark-text);
+    background-color: var(--light-bg);
+    transition: var(--transition);
+}
+
+img{
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -20%;
+    margin-top: 0;
+    margin-bottom: -15%;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 30px;
+    display: block;
+}
+
+.gallery-grid h1 {
+    text-align: center;
+    font-size: var(--font-size-lg);
+    margin-top: var(--spacing-md);
+    margin-bottom: 0;
+}
+
+.gallery-grid img:hover{
+    transform: translateY(-20px);
+    transition: background 0.5s, transform 0.5s;
+}
+
+/* Excerpts Section */
+.excerpts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.excerpt-item {
+    text-align: center;
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.excerpt-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.excerpt-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-sm);
+    margin-left: auto;
+}
+
+.excerpt-caption {
+    font-size: var(--font-size-sm);
+    color: var(--dark-text);
+    font-weight: 500;
+    margin: 0;
+}
+
+/* ========================================
+   3. TYPOGRAPHY
+   ======================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: var(--font-size-3xl);
+}
+
+h2 {
+    font-size: var(--font-size-2xl);
+}
+
+h3 {
+    font-size: var(--font-size-xl);
+}
+
+p {
+    margin-bottom: var(--spacing-md);
+    color: var(--light-text);
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+/* ========================================
+   4. CONTAINER & LAYOUT UTILITIES
+   ======================================== */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.section {
+    padding: var(--spacing-2xl) 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+    margin: var(--spacing-sm) auto 0;
+    border-radius: var(--radius-md);
+}
+
+.section-footer {
+    text-align: center;
+    margin-top: var(--spacing-xl);
+}
+
+/* ========================================
+   5. HEADER & NAVIGATION
+   ======================================== */
+
+.header {
+    background-color: var(--white);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: var(--transition);
+}
+
+.navbar {
+    padding: var(--spacing-sm) 0;
+    position: relative;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    position: relative;
+}
+
+.navbar-brand {
+    flex-shrink: 0;
+}
+
+.church-name {
+    font-size: var(--font-size-xl);
+    color: var(--primary-color);
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-lg);
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--dark-text);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color);
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.nav-link.active {
+    color: var(--secondary-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+    background: none;
+    border: none;
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark-mode-toggle:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+    transform: scale(1.1);
+}
+
+/* ========================================
+   6. HERO SECTION
+   ======================================== */
+
+.hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: var(--spacing-2xl) var(--spacing-md);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--white);
+}
+
+.hero-motto {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-xl);
+    color: rgba(255, 255, 255, 0.9);
+    font-style: italic;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   7. BUTTONS
+   ======================================== */
+
+.btn {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+    font-size: var(--font-size-base);
+    white-space: nowrap;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    color: var(--white);
+}
+
+.btn-secondary {
+    background-color: var(--accent-color);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: #e67e22;
+    color: var(--white);
+}
+
+.btn-outline {
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+    background-color: transparent;
+}
+
+.btn-outline:hover {
+    background-color: var(--secondary-color);
+    color: var(--white);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: var(--white);
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn.full-width {
+    width: 100%;
+}
+
+/* ========================================
+   8. FORMS
+   ======================================== */
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: var(--spacing-sm);
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius-md);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--dark-text);
+    background-color: var(--white);
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* ========================================
+   9. CARDS & COMPONENTS
+   ======================================== */
+
+.form-card,
+.content-box {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.form-card:hover,
+.content-box:hover {
+    box-shadow: var(--shadow-lg);
+}
+
+.sermon-card,
+.talent-card,
+.testimony-card,
+.info-card,
+.leadership-card {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.sermon-card:hover,
+.talent-card:hover,
+.testimony-card:hover,
+.info-card:hover,
+.leadership-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+}
+
+.card-header {
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.card-title {
+    font-size: var(--font-size-lg);
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--primary-color);
+}
+
+.card-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--light-text);
+    margin: 0;
+}
+
+.card-content {
+    flex-grow: 1;
+    margin-bottom: var(--spacing-md);
+}
+
+.card-footer {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid #f0f0f0;
+}
+
+.card-footer button,
+.card-footer a {
+    flex: 1;
+}
+
+/* ========================================
+   10. GRIDS & LAYOUTS
+   ======================================== */
+
+.sermons-grid,
+.talents-grid,
+.testimonies-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.sermons-list,
+.talents-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.sermon-card,
+.talent-card,
+.testimony-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.vision-mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+.two-column-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+/* ========================================
+   11. PAGE HEADER
+   ======================================== */
+
+.page-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    padding: var(--spacing-2xl) var(--spacing-md);
+    text-align: center;
+}
+
+.page-header h1 {
+    color: var(--white);
+    margin-bottom: var(--spacing-sm);
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ========================================
+   12. FOOTER
+   ======================================== */
+
+.footer {
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+    padding: var(--spacing-lg) var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+}
+
+.footer p {
+    margin-bottom: var(--spacing-xs);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ========================================
+   13. FILTERS & SEARCH
+   ======================================== */
+
+.filters-section {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.filter-input,
+.filter-select {
+    padding: var(--spacing-sm);
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    color: var(--dark-text);
+    background-color: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-input:focus,
+.filter-select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.stats {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-end;
+}
+
+.stats p {
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ========================================
+   14. MODALS
+   ======================================== */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+.modal-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: none;
+    border: none;
+    font-size: var(--font-size-xl);
+    cursor: pointer;
+    color: var(--light-text);
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.modal-title {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-description,
+.modal-pastor,
+.modal-skill,
+.modal-contact-info {
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-player {
+    margin: var(--spacing-lg) 0;
+}
+
+.modal-player audio {
+    width: 100%;
+}
+
+.contact-highlight {
+    background-color: #fff3cd;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--accent-color);
+    font-weight: 600;
+}
+
+/* ========================================
+   15. SPECIAL COMPONENTS
+   ======================================== */
+
+.info-card {
+    text-align: center;
+}
+
+.card-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.leadership-card {
+    text-align: center;
+}
+
+.leader-avatar {
+    font-size: 4rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.leadership-role {
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.leadership-bio {
+    font-size: var(--font-size-sm);
+    color: var(--light-text);
+}
+
+.vision-mission-card {
+    background-color: var(--white);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.vision-mission-text {
+    font-size: var(--font-size-base);
+    line-height: 1.8;
+    color: var(--light-text);
+}
+
+.values-list {
+    list-style: none;
+    padding: 0;
+}
+
+.values-list li {
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--light-text);
+}
+
+.values-list li:last-child {
+    border-bottom: none;
+}
+
+.values-list strong {
+    color: var(--secondary-color);
+}
+
+/* Testimony Engagement */
+.testimony-stats {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: center;
+    padding-top: var(--spacing-md);
+    border-top: 1px solid #f0f0f0;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    transition: var(--transition);
+    padding: var(--spacing-xs);
+}
+
+.like-button:hover {
+    transform: scale(1.2);
+}
+
+.like-button.liked {
+    color: var(--danger-color);
+}
+
+.like-count {
+    font-size: var(--font-size-sm);
+    color: var(--light-text);
+}
+
+/* Posted Date */
+.posted-date {
+    font-size: var(--font-size-sm);
+    color: var(--light-text);
+    margin-top: var(--spacing-sm);
+}
+
+.placeholder-text {
+    text-align: center;
+    color: var(--light-text);
+    padding: var(--spacing-xl) var(--spacing-md);
+}
+
+/* Availability Badge */
+.availability-badge {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+}
+
+.availability-badge.available {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.availability-badge.limited {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.availability-badge.unavailable {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.cta-box {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.05), rgba(243, 156, 18, 0.05));
+    border: 2px solid var(--secondary-color);
+}
+
+.cta-box h2 {
+    color: var(--primary-color);
+}
+
+.cta-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    margin-top: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   16. ANIMATIONS
+   ======================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(20px);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.sermon-card,
+.talent-card,
+.testimony-card,
+.info-card,
+.leadership-card {
+    animation: slideInLeft 0.5s ease;
+}
+
+/* ========================================
+   17. RESPONSIVE DESIGN
+   ======================================== */
+
+/* Tablet */
+@media (max-width: 800px) {
+    .navbar-container {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+        justify-content: center;
+    }
+
+    .hero-title {
+        font-size: var(--font-size-2xl);
+    }
+
+    .hero-motto {
+        font-size: var(--font-size-base);
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+    }
+
+    .two-column-layout {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .sermons-grid,
+    .talents-grid,
+    .testimonies-list {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-section {
+        flex-direction: column;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    h2 {
+        font-size: var(--font-size-xl);
+    }
+
+    .section {
+        padding: var(--spacing-xl) 0;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .cta-buttons .btn {
+        width: 100%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    :root {
+        --spacing-lg: 1.5rem;
+        --spacing-xl: 2rem;
+        --spacing-2xl: 2.5rem;
+    }
+
+    .navbar-container {
+        padding: 0 var(--spacing-sm);
+    }
+
+    .church-name {
+        font-size: var(--font-size-lg);
+    }
+
+    .nav-menu {
+        gap: var(--spacing-sm);
+    }
+
+    .nav-link {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    .hero {
+        padding: var(--spacing-xl) var(--spacing-sm);
+        min-height: 350px;
+    }
+
+    .hero-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .hero-motto {
+        font-size: var(--font-size-sm);
+    }
+
+    .form-card,
+    .content-box {
+        padding: var(--spacing-md);
+    }
+
+    .section-title {
+        font-size: var(--font-size-xl);
+    }
+
+    .card-icon {
+        font-size: 2.5rem;
+    }
+
+    .leader-avatar {
+        font-size: 3rem;
+    }
+
+    .page-header {
+        padding: var(--spacing-xl) var(--spacing-sm);
+    }
+
+    .page-header h1 {
+        font-size: var(--font-size-2xl);
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: var(--spacing-md);
+    }
+
+    .filters-section {
+        padding: var(--spacing-md);
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    img{
+        margin-left: -25%;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid img{
+        width: 130%;
+        height: 200px;
+        border-radius: 15px;
+    }
+
+    .gallery-grid h1{
+        font-size: var(--font-size-lg);
+    }
+
+    .excerpts-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .excerpt-item img {
+        height: 150px;
+    }
+}
+
+/* ========================================
+   18. UTILITY CLASSES
+   ======================================== */
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--light-text);
+}
+
+.mt-md {
+    margin-top: var(--spacing-md);
+}
+
+.mb-md {
+    margin-bottom: var(--spacing-md);
+}
+
+.hidden {
+    display: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

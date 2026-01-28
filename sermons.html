@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sermons - RCCG Solomon's Porch Area</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <img src="images/rccglogo.png" alt="logo">
+                    <h1 class="church-name">RCCG Solomon's Porch</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="sermons.html" class="nav-link active">Sermons</a></li>
+                    <li><a href="talents.html" class="nav-link">Talents</a></li>
+                    <li><a href="testimonials.html" class="nav-link">Testimonies</a></li>
+                </ul>
+                <button class="dark-mode-toggle" id="darkModeBtn" aria-label="Toggle dark mode">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Sermons</h1>
+                <p>Listen to inspiring messages from our pastors</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <div class="section">
+            <div class="container">
+                <div class="two-column-layout">
+                    <!-- Left Column: Form -->
+                    <div class="form-column">
+                        <div class="form-card">
+                            <h2>Share a Sermon</h2>
+                            <form id="sermonForm" class="form">
+                                <div class="form-group">
+                                    <label for="pastorName">Pastor's Name *</label>
+                                    <input type="text" id="pastorName" name="pastorName" required placeholder="e.g., Rev. Dr. Marcus Johnson">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sermonTitle">Sermon Title *</label>
+                                    <input type="text" id="sermonTitle" name="sermonTitle" required placeholder="e.g., Finding Purpose in Faith">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sermonDate">Sermon Date *</label>
+                                    <input type="date" id="sermonDate" name="sermonDate" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="mediaUrl">Audio/Video Link</label>
+                                    <input type="url" id="mediaUrl" name="mediaUrl" placeholder="https://example.com/sermon.mp3">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="sermonDescription">Description *</label>
+                                    <textarea id="sermonDescription" name="sermonDescription" required placeholder="Brief summary of the sermon..." rows="4"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary full-width">Share Sermon</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Sermons List & Filters -->
+                    <div class="content-column">
+                        <div class="filters-section">
+                            <div class="filter-group">
+                                <label for="filterPastor">Filter by Pastor:</label>
+                                <select id="filterPastor" class="filter-select">
+                                    <option value="">All Pastors</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="sortSermons">Sort by:</label>
+                                <select id="sortSermons" class="filter-select">
+                                    <option value="newest">Newest First</option>
+                                    <option value="oldest">Oldest First</option>
+                                    <option value="title">Title (A-Z)</option>
+                                </select>
+                            </div>
+
+                            <button id="clearFilters" class="btn btn-outline">Clear Filters</button>
+                        </div>
+
+                        <div id="sermonsContainer" class="sermons-list">
+                            <p class="placeholder-text">No sermons yet. Be the first to share!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 RCCG Solomon's Porch Area Headquarters. All rights reserved.</p>
+            <p>Building faith, community, and purpose together.</p>
+        </div>
+    </footer>
+
+    <!-- Audio Player Modal -->
+    <div id="audioModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" id="closeAudioModal">&times;</button>
+            <h3 id="modalSermonTitle">Sermon Title</h3>
+            <p id="modalPastorName" class="modal-pastor">By: Pastor</p>
+            <div class="modal-player">
+                <audio id="audioPlayer" controls>
+                    <source id="audioSource" src="" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <p id="modalDescription" class="modal-description"></p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/sermons.js"></script>
+</body>
+</html>

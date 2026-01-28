@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talents Marketplace - Solomon's Porch Area</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <img src="images/rccglogo2.png" alt="logo">
+                    <h1 class="church-name">RCCG Solomon's Porch</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="sermons.html" class="nav-link">Sermons</a></li>
+                    <li><a href="talents.html" class="nav-link active">Talents</a></li>
+                    <li><a href="testimonials.html" class="nav-link">Testimonies</a></li>
+                </ul>
+                <button class="dark-mode-toggle" id="darkModeBtn" aria-label="Toggle dark mode">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Community Talents Marketplace</h1>
+                <p>Share your skills and discover talents within our community</p>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <div class="section">
+            <div class="container">
+                <div class="two-column-layout">
+                    <!-- Left Column: Form -->
+                    <div class="form-column">
+                        <div class="form-card">
+                            <h2>Post Your Skill</h2>
+                            <form id="talentForm" class="form">
+                                <div class="form-group">
+                                    <label for="talentName">Full Name *</label>
+                                    <input type="text" id="talentName" name="talentName" required placeholder="Your name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="skillName">Skill / Talent *</label>
+                                    <input type="text" id="skillName" name="skillName" required placeholder="e.g., Web Developer, Carpenter, Hairdresser">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="talentDescription">Description *</label>
+                                    <textarea id="talentDescription" name="talentDescription" required placeholder="Describe your skill, experience, and what you can offer..." rows="4"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="talentContact">Contact (Email or Phone) *</label>
+                                    <input type="text" id="talentContact" name="talentContact" required placeholder="email@example.com or (123) 456-7890">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="talentAvailability">Availability Status *</label>
+                                    <select id="talentAvailability" name="talentAvailability" required>
+                                        <option value="">Select availability</option>
+                                        <option value="Available">Available</option>
+                                        <option value="Limited">Limited</option>
+                                        <option value="Unavailable">Unavailable</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary full-width">Post My Skill</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Talents List & Filters -->
+                    <div class="content-column">
+                        <div class="filters-section">
+                            <div class="filter-group">
+                                <label for="searchTalent">Search Skills:</label>
+                                <input type="text" id="searchTalent" class="filter-input" placeholder="Search by skill name...">
+                            </div>
+
+                            <div class="filter-group">
+                                <label for="filterAvailability">Filter by Availability:</label>
+                                <select id="filterAvailability" class="filter-select">
+                                    <option value="">All Status</option>
+                                    <option value="Available">Available</option>
+                                    <option value="Limited">Limited</option>
+                                    <option value="Unavailable">Unavailable</option>
+                                </select>
+                            </div>
+
+                            <button id="clearTalentFilters" class="btn btn-outline">Clear Filters</button>
+                        </div>
+
+                        <div id="talentsContainer" class="talents-list">
+                            <p class="placeholder-text">No talents posted yet. Be the first to share your skills!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Solomon's Porch Area Headquarters All rights reserved.</p>
+            <p>Building faith, community, and purpose together.</p>
+        </div>
+    </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" id="closeContactModal">&times;</button>
+            <h3 id="modalTalentName">Talent Name</h3>
+            <p id="modalSkill" class="modal-skill">Skill: </p>
+            <p id="modalDescription" class="modal-description"></p>
+            <div class="modal-contact-info">
+                <h4>Contact Information:</h4>
+                <p id="modalContact" class="contact-highlight"></p>
+            </div>
+            <button id="copyContact" class="btn btn-primary">Copy Contact Info</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/talents.js"></script>
+</body>
+</html>
