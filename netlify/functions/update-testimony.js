@@ -6,45 +6,51 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_DIR = '/tmp';
-const DATA_FILE = path.join(DATA_DIR, 'testimonies.json');
+// In-memory storage
+let testimoniesData = [];
+const DATA_FILE = path.join(process.env.NETLIFY_BUILD_DIR || '/tmp', 'testimonies.json');
 
-function ensureDataFile() {
+function loadTestimonies() {
     try {
-        if (!fs.existsSync(DATA_DIR)) {
-            fs.mkdirSync(DATA_DIR, { recursive: true });
-        }
-        if (!fs.existsSync(DATA_FILE)) {
-            fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+        if (fs.existsSync(DATA_FILE)) {
+            const data = fs.readFileSync(DATA_FILE, 'utf8');
+            testimoniesData = JSON.parse(data) || [];
+        } else {
+            testimoniesData = [];
         }
     } catch (error) {
-        console.error('Error ensuring data file:', error);
+        console.error('Error loading testimonies:', error);
+        testimoniesData = [];
     }
 }
 
-function readTestimonies() {
-    try {
-        ensureDataFile();
-        const data = fs.readFileSync(DATA_FILE, 'utf8');
-        return JSON.parse(data);
-    } catch (error) {
-        console.error('Error reading testimonies:', error);
-        return [];
-    }
+function getTestimonies() {
+    return testimoniesData;
 }
 
-function writeTestimonies(testimonies) {
+function saveTestimonies(testimonies) {
     try {
-        ensureDataFile();
-        fs.writeFileSync(DATA_FILE, JSON.stringify(testimonies, null, 2));
+        testimoniesData = testimonies;
+        try {
+            const dir = path.dirname(DATA_FILE);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+            fs.writeFileSync(DATA_FILE, JSON.stringify(testimonies, null, 2));
+        } catch (fileError) {
+            console.warn('File persistence unavailable:', fileError.message);
+        }
         return true;
     } catch (error) {
-        console.error('Error writing testimonies:', error);
+        console.error('Error saving testimonies:', error);
         return false;
     }
 }
 
 exports.handler = async (event, context) => {
+    // Load testimonies at start of invocation
+    loadTestimonies();
+    
     const headers = {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
@@ -80,7 +86,7 @@ exports.handler = async (event, context) => {
             const body = JSON.parse(event.body || '{}');
             const id = parseInt(testimonyId, 10);
             
-            let testimonies = readTestimonies();
+            let testimonies = getTestimonies();
             const index = testimonies.findIndex(t => t.id === id);
 
             if (index === -1) {
@@ -100,7 +106,7 @@ exports.handler = async (event, context) => {
                 ...body
             };
 
-            const success = writeTestimonies(testimonies);
+            const success = saveTestimonies(testimonies);
 
             if (!success) {
                 return {
@@ -138,7 +144,7 @@ exports.handler = async (event, context) => {
             }
 
             const id = parseInt(testimonyId, 10);
-            let testimonies = readTestimonies();
+            let testimonies = getTestimonies();
             
             const index = testimonies.findIndex(t => t.id === id);
             if (index === -1) {
@@ -153,7 +159,7 @@ exports.handler = async (event, context) => {
             }
 
             testimonies.splice(index, 1);
-            const success = writeTestimonies(testimonies);
+            const success = saveTestimonies(testimonies);
 
             if (!success) {
                 return {

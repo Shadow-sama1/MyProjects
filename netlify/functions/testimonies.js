@@ -10,53 +10,53 @@
 const fs = require('fs');
 const path = require('path');
 
-// Path to data file (stored in Netlify's persistent storage)
-const DATA_DIR = '/tmp';
-const DATA_FILE = path.join(DATA_DIR, 'testimonies.json');
+// In-memory storage (loaded from file on each invocation)
+let testimoniesData = [];
+const DATA_FILE = path.join(process.env.NETLIFY_BUILD_DIR || '/tmp', 'testimonies.json');
 
 /**
- * Ensure data directory exists and initialize data file if needed
+ * Load testimonies from file into memory
  */
-function ensureDataFile() {
+function loadTestimonies() {
     try {
-        // Create directory if it doesn't exist
-        if (!fs.existsSync(DATA_DIR)) {
-            fs.mkdirSync(DATA_DIR, { recursive: true });
-        }
-
-        // Initialize testimonies file if it doesn't exist
-        if (!fs.existsSync(DATA_FILE)) {
-            fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+        if (fs.existsSync(DATA_FILE)) {
+            const data = fs.readFileSync(DATA_FILE, 'utf8');
+            testimoniesData = JSON.parse(data) || [];
+        } else {
+            testimoniesData = [];
         }
     } catch (error) {
-        console.error('Error ensuring data file:', error);
+        console.error('Error loading testimonies:', error);
+        testimoniesData = [];
     }
 }
 
 /**
- * Read all testimonies from file
+ * Get all testimonies from memory
  */
-function readTestimonies() {
-    try {
-        ensureDataFile();
-        const data = fs.readFileSync(DATA_FILE, 'utf8');
-        return JSON.parse(data);
-    } catch (error) {
-        console.error('Error reading testimonies:', error);
-        return [];
-    }
+function getTestimonies() {
+    return testimoniesData;
 }
 
 /**
- * Write testimonies to file
+ * Save testimonies to memory and file
  */
-function writeTestimonies(testimonies) {
+function saveTestimonies(testimonies) {
     try {
-        ensureDataFile();
-        fs.writeFileSync(DATA_FILE, JSON.stringify(testimonies, null, 2));
+        testimoniesData = testimonies;
+        // Try to persist to file
+        try {
+            const dir = path.dirname(DATA_FILE);
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+            fs.writeFileSync(DATA_FILE, JSON.stringify(testimonies, null, 2));
+        } catch (fileError) {
+            console.warn('File persistence unavailable:', fileError.message);
+        }
         return true;
     } catch (error) {
-        console.error('Error writing testimonies:', error);
+        console.error('Error saving testimonies:', error);
         return false;
     }
 }
@@ -65,6 +65,9 @@ function writeTestimonies(testimonies) {
  * Main handler function
  */
 exports.handler = async (event, context) => {
+    // Load testimonies at start of invocation
+    loadTestimonies();
+    
     // Enable CORS
     const headers = {
         'Content-Type': 'application/json',
@@ -85,7 +88,7 @@ exports.handler = async (event, context) => {
     try {
         // GET: Retrieve all testimonies
         if (event.httpMethod === 'GET') {
-            const testimonies = readTestimonies();
+            const testimonies = getTestimonies();
             
             return {
                 statusCode: 200,
@@ -114,8 +117,8 @@ exports.handler = async (event, context) => {
                 };
             }
 
-            // Read existing testimonies
-            const testimonies = readTestimonies();
+            // Get existing testimonies
+            const testimonies = getTestimonies();
 
             // Create new testimony object
             const newTestimony = {
@@ -131,8 +134,8 @@ exports.handler = async (event, context) => {
             // Add to array
             testimonies.push(newTestimony);
 
-            // Write back to file
-            const success = writeTestimonies(testimonies);
+            // Save testimonies
+            const success = saveTestimonies(testimonies);
 
             if (!success) {
                 return {
