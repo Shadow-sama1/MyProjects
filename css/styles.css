@@ -127,6 +127,51 @@ img{
     transition: background 0.5s, transform 0.5s;
 }
 
+
+
+/* Pre-Gallery Styles */
+.container-gallery {
+    margin: var(--spacing-lg) 0;
+}
+
+.gallery-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    .gallery-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+    /* No flex-shrink needed for grid */
+
+
+
+.img-holder {
+    width: 100%;
+    aspect-ratio: 700 / 925; /* Maintain aspect ratio */
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+.img-cover {
+    display: grid;
+    width: 700px;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.img-cover:hover {
+    transform: scale(1.05);
+}
+
 /* Excerpts Section */
 .excerpts-grid {
     display: grid;
@@ -900,8 +945,19 @@ a:hover {
 }
 
 .leader-avatar {
-    font-size: 4rem;
-    margin-bottom: var(--spacing-md);
+    width: 120px;
+    height: 180px;
+    margin: 0 auto var(--spacing-md);
+    border-radius: 30px;
+    overflow: hidden;
+    border: 3px solid var(--secondary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.leader-avatar img {
+    width: 145px;
+    height: 220px;
+    object-fit: cover;
 }
 
 .leadership-role {
@@ -1217,7 +1273,8 @@ a:hover {
     }
 
     .leader-avatar {
-        font-size: 3rem;
+        width: 120px;
+        height: 100%;
     }
 
     .page-header {
@@ -1267,6 +1324,26 @@ a:hover {
 
     .excerpt-item img {
         height: 150px;
+    }
+
+    .img-holder {
+        width: var(--width, 100%);
+        height: var(--height, 100%);
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+        aspect-ratio: 700 / 925; /* Maintain aspect ratio */
+        overflow: hidden;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-md);
+    }
+
+
+    .img-cover {
+        display: grid;
+        width: 450px;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
     }
 }
 
